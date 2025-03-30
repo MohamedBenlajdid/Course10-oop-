@@ -275,6 +275,8 @@ public:
 	{
 		return _FirstName + " " + _LastName;
 	}
+
+	
 	clsPerson(int ID, string FirstName, string LastName, string Email, string Phone)
 	{
 		_ID = ID;
@@ -463,22 +465,112 @@ public:
 		cout << "\nMessage : " << Message;
 	}
 };
+//Now let us see what is inheritance and how we can use it.
+
+class clsEmployee1 : public clsPerson
+{
+private : // we define only new variable instead of rewrite all variables.
+	string _Title;
+	string _Department;
+	float _Salary;
+public:
+
+	clsEmployee1(int ID, string FirstName, string LastName, string Email, string Phone
+	,string Title,string Department,float Salary) 
+		: clsPerson(ID,FirstName,LastName,Email,Phone)
+	{
+		_Title = Title;
+		_Department = Department;
+		_Salary = Salary;
+	}
+
+	void SetTitle(string Title)
+	{
+		_Title = Title;
+	}
+	void SetSalary(float Salary)
+	{
+		_Salary = Salary;
+	}
+	void SetDepartment(string Department)
+	{
+		_Department = Department;
+	}
+	string Title()
+	{
+		return _Title;
+	}
+	float Salary()
+	{
+		return _Salary;
+	}
+	string Department()
+	{
+		return _Department;
+	}
+	//Let's see Fonction Overriding . Print().
+	void Print()
+	{
+		cout << "\t\tInfo\n";
+		cout << "==========================================================\n";
+		cout << "\nID         : " << ID();
+		cout << "\nFirst Name : " << FirstName();
+		cout << "\nLast Name  : " << LastName();
+		cout << "\nFull Name  : " << FullName();
+		cout << "\nTitle      : " << _Title;
+		cout << "\nEmail      : " << Email();
+		cout << "\nPhone      : " << Phone();
+		cout << "\nDepartment : " << _Department;
+		cout << "\nSalary     : " << _Salary;
+		cout << "\n==========================================================\n";
+	}
+};
+
+class clsDeveloper:public clsEmployee1
+{
+private:
+	string _MainProgrammingLanguage;
+public:
+	clsDeveloper(int ID, string FirstName, string LastName, string Email, string Phone
+		, string Title, string Department, float Salary, string MainProgrammingLanguage)
+		: clsEmployee1(ID, FirstName, LastName, Email, Phone, Title, Department, Salary)
+	{
+		_MainProgrammingLanguage = MainProgrammingLanguage;
+	}
+	void SetMainProgrammingLanguage(string MPL)
+	{
+		_MainProgrammingLanguage = MPL;
+	}
+	string MainProgrammingLanguage()
+	{
+		return _MainProgrammingLanguage;
+	}
+	//Fonction Overriding .
+	void Print()
+	{
+		cout << "\t\tInfo\n";
+		cout << "==========================================================\n";
+		cout << "\nID         : " << ID();
+		cout << "\nFirst Name : " << FirstName();
+		cout << "\nLast Name  : " << LastName();
+		cout << "\nFull Name  : " << FullName();
+		cout << "\nTitle      : " << Title();
+		cout << "\nEmail      : " << Email();
+		cout << "\nPhone      : " << Phone();
+		cout << "\nDepartment : " << Department();
+		cout << "\nMPL        : " << _MainProgrammingLanguage;
+		cout << "\nSalary     : " << Salary();
+		cout << "\n==========================================================\n";
+	}
+};
 
 int main()
 {
 
-	clsPerson Person1(10, "Mohamed", "Benlajdid", "benm21158@gmail.com", "0656008876");
-	Person1.Print();
-
-	Person1.SendEmail("Dear Friend", "I trust you keeping very well");
-	Person1.SendSMS("I Hope you doing well , call me later please ");
-
-	clsEmployee Employee1(11, "Mohamed", "Benlajdid", "Co-Chef",
-		"benm21158@gmail.com", "0684869985",10000,"CrystalGarden");
-	Employee1.Print();
-
-	Employee1.SendEmail("Mr Benlajdid","Hello Mr Mohamed ,You Did a good job.");
-	Employee1.SendSMS("I Hope accept our work request");
+	clsDeveloper Developer(10, "Mohamed", "Benlajdid", "benm21158@gmail.com", "0684869985",
+		"Co-Chef", "CrystalGarden", 7000 ,"C++ Language");
+	Developer.Print();
+	
 
 	system("pause>0");
 }
